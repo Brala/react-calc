@@ -1,0 +1,18 @@
+.calculator--display__equation{
+    width: 100%;
+    line-height: 104px;
+    padding-right: 35px;
+    text-align: right;
+    background-color: #fdd7ea;
+    color: #f988bd;
+    font-size: 20px;
+    font-family: 'Samsung Sharp Sans Bold';
+}
+.calculator--display__result{
+    width: 100%;
+    line-height: 94px;
+    padding-right: 35px;
+    text-align: right;
+    color: #fa99c9;
+    font-size: 40px;
+}

@@ -1,10 +1,35 @@
+@font-face {
+  font-family: 'Samsung Sharp Sans Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Samsung Sharp Sans Regular'), url('../../assets/fonts/samsungsharpsans.woff') format('woff');
+  }
+  
+  
+  @font-face {
+  font-family: 'Samsung Sharp Sans Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Samsung Sharp Sans Medium'), url('../../assets/fonts/samsungsharpsans-medium.woff') format('woff');
+  }
+  
+  
+  @font-face {
+  font-family: 'Samsung Sharp Sans Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Samsung Sharp Sans Bold'), url('../../assets/fonts/samsungsharpsans-bold.woff') format('woff');
+  }
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: -apple-system, BlinkMacSystemFont, 'Samsung Sharp Sans Regular', "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("../../assets/img/calc_desktop_background.jpg");
+  overflow: hidden
 }
 
 code {
@@ -14,15 +39,31 @@ code {
 
 .App {
   text-align: center;
+  position: relative;
+  width: 100%;
+  height: 100vh;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff;
+  width: 372px;
+  height: 662px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -186px;
+  margin-top: -331px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
+  -webkit-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+}
+
+.calculator--buttons{
+  height: calc(100% - 104px);
 }

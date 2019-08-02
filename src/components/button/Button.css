@@ -1,0 +1,17 @@
+.calculator--buttons button{
+    width: 25%;
+    height: 16.6666666%;
+    font-size: 25px; 
+    border: none;
+    color: #616161;
+    background-color: #ffffff;   
+    font-family: 'Samsung Sharp Sans Regular';  
+}
+
+button.calculator--buttons--button__bold{
+    /* line-height: 16.6666666%;
+    height: 16.6666666%; */
+    font-family: 'Samsung Sharp Sans Bold';    
+    /* font-size: 35px; */
+    background-color: #d7d7d7;
+}

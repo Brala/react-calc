@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Button.css';
 
 class Button extends Component {
     runParentHandleClick = () => {
@@ -6,7 +7,11 @@ class Button extends Component {
     }
     render() {
         return (
-            <button onClick={this.runParentHandleClick}>{this.props.name}</button>
+            <button 
+                className={this.props.className}
+                onClick={this.runParentHandleClick}>
+                    {this.props.name}
+            </button>
         )
     }
 }
