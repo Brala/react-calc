@@ -8,9 +8,46 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      currentNumber: "empty string"
+      currentNumber: "0",
+      operatorFlag: false
     }
   }
+
+  handleClick = (buttonName) => {
+    let currentNumber = this.state.currentNumber
+    let operatorFlag = this.state.operatorFlag
+    switch(true){
+      case  buttonName==="0" ||
+            buttonName==="1" ||
+            buttonName==="2" ||
+            buttonName==="3" ||
+            buttonName==="4" ||
+            buttonName==="5" ||
+            buttonName==="6" ||
+            buttonName==="7" ||
+            buttonName==="8" ||
+            buttonName==="9" :
+      if(this.state.currentNumber!=="0") {
+      currentNumber += buttonName
+      operatorFlag = false
+      }else{
+        currentNumber = buttonName
+      }      
+      break
+      case  buttonName === "+" ||
+            buttonName === "-" ||
+            buttonName === "÷" ||
+            buttonName === "×":
+      if(!this.state.operatorFlag){
+        currentNumber += buttonName
+        operatorFlag = true
+      }
+
+    }
+    this.setState({operatorFlag})
+    this.setState({currentNumber})
+  }
+
   render(){
     return(
       <div className="App">
