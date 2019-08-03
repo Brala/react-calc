@@ -1,6 +1,7 @@
 .calculator--display__equation{
     width: 100%;
     line-height: 104px;
+    height: 15.7%;
     padding-right: 35px;
     text-align: right;
     background-color: #fdd7ea;
@@ -11,6 +12,7 @@
 .calculator--display__result{
     width: 100%;
     line-height: 94px;
+    height: 14.2%;
     padding-right: 35px;
     text-align: right;
     color: #fa99c9;

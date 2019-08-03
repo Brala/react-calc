@@ -21,6 +21,10 @@
   src: local('Samsung Sharp Sans Bold'), url('../../assets/fonts/samsungsharpsans-bold.woff') format('woff');
   }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Samsung Sharp Sans Regular', "Segoe UI", "Roboto", "Oxygen",
@@ -39,20 +43,19 @@ code {
 
 .App {
   text-align: center;
-  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-header {
   background-color: #ffffff;
   width: 372px;
+  max-width: 100%;
   height: 662px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -186px;
-  margin-top: -331px;
+  max-height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
