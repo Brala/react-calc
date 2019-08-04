@@ -8,14 +8,19 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      currentNumber: "0",
-      operatorFlag: false
+      currentEquation: "0",
+      currentResult: "0",
+      operatorFlag: false,
+      commaFlag: false
     }
   }
 
   handleClick = (buttonName) => {
-    let currentNumber = this.state.currentNumber
+    let currentEquation = this.state.currentEquation
+    let currentResult = this.state.currentResult
     let operatorFlag = this.state.operatorFlag
+    let commaFlag = this.state.commaFlag
+
     switch(true){
       case  buttonName==="0" ||
             buttonName==="1" ||
@@ -27,33 +32,70 @@ class App extends Component {
             buttonName==="7" ||
             buttonName==="8" ||
             buttonName==="9" :
-      if(this.state.currentNumber!=="0") {
-      currentNumber += buttonName
-      operatorFlag = false
-      }else{
-        currentNumber = buttonName
-      }      
-      break
+        if(this.state.currentEquation!=="0") {
+        currentEquation += buttonName
+        }else{
+          currentEquation = buttonName
+        }      
+            break
       case  buttonName === "+" ||
             buttonName === "-" ||
             buttonName === "÷" ||
             buttonName === "×":
       if(!this.state.operatorFlag){
-        currentNumber += buttonName
-        operatorFlag = true
-      }
-
+          currentEquation += buttonName
+        }else{
+          const newNumber = currentEquation.slice(0, currentEquation.length - 1)
+          currentEquation = newNumber +buttonName
+        }
+            break
+      case  buttonName === "C":
+            currentEquation = "0"
+            break
+      case  buttonName === "=":
+            // currentResult = eval(currentEquation)
+            currentResult = Function('"use strict";return (' + currentEquation + ')')()
+            break
+      case  buttonName === ",":
+            if(!this.state.commaFlag){
+              currentEquation += "."
+            }
+            break
+      case  buttonName === "DEL":
+            currentEquation = currentEquation.slice(0, -1);
+            break
+      case  buttonName === "+/-":
+            currentResult = currentResult.charAt(0) === '-' ? currentResult.substr(1) : '-' + currentResult
+            break
+      default: // no default
+            break
     }
-    this.setState({operatorFlag})
-    this.setState({currentNumber})
+    
+    this.setState({currentEquation, currentResult, operatorFlag, commaFlag})
+// Check flags
+    if( this.state.currentEquation.slice(-1) === "+" ||
+        this.state.currentEquation.slice(-1) === "-" ||
+        this.state.currentEquation.slice(-1) === "÷" ||
+        this.state.currentEquation.slice(-1) === "×") {
+      operatorFlag = true
+    }else{
+      operatorFlag = false
+    }
+
+    if( this.state.currentEquation.slice(-1) === ",") {
+      commaFlag = true
+    }else{
+      commaFlag = false
+    }
+
   }
 
   render(){
     return(
       <div className="App">
         <header className="App-header calculator">
-          <Display className="calculator--display__equation" currentNumber={this.state.currentNumber}/>
-          <Display className="calculator--display__result" currentNumber={this.state.currentNumber}/>
+          <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
+          <Display className="calculator--display__result" currentNumber={this.state.currentResult}/>
           <div className="calculator--buttons">
             <Button id="clear" name="C" handleClick={this.handleClick}/>
             <Button id="change sign" name="+/-" handleClick={this.handleClick}/>
@@ -72,7 +114,7 @@ class App extends Component {
             <Button id="nine" name="9" handleClick={this.handleClick}/>
             <Button id="add" className="calculator--buttons--button__bold" name="+" handleClick={this.handleClick}/>
             <Button id="zero" name="0" handleClick={this.handleClick}/>
-            <Button id="dot" name="," handleClick={this.handleClick}/>
+            <Button id="comma" name="," handleClick={this.handleClick}/>
             <Button id="delete" name="DEL" handleClick={this.handleClick}/>
             <Button id="equal" className="calculator--buttons--button__bold" name="=" handleClick={this.handleClick}/>
           </div>

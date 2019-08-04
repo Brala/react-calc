@@ -3,7 +3,7 @@ import './Button.css';
 
 class Button extends Component {
     runParentHandleClick = () => {
-        {this.props.handleClick(this.props.name)}
+        this.props.handleClick(this.props.name)
     }
     render() {
         return (
