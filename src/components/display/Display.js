@@ -4,9 +4,9 @@ import './Display.css';
 class Display extends Component {
   render() {
     return (
-      <div id="display" className={this.props.className}>
-        {this.props.currentNumber}
-      </div>
+      <input type="text" id="display" className={this.props.className} value={this.props.currentNumber}>
+        
+      </input>
     )
   }
 }

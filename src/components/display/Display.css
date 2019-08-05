@@ -1,20 +1,23 @@
-.calculator--display__equation{
+.calculator input{   
     width: 100%;
+    padding-right: 35px;
+    border: none;
+    text-align: right;  
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.calculator--display__equation{
     line-height: 104px;
     height: 15.7%;
-    padding-right: 35px;
-    text-align: right;
     background-color: #fdd7ea;
     color: #f988bd;
     font-size: 20px;
     font-family: 'Samsung Sharp Sans Bold';
 }
 .calculator--display__result{
-    width: 100%;
     line-height: 94px;
     height: 14.2%;
-    padding-right: 35px;
-    text-align: right;
     color: #fa99c9;
     font-size: 40px;
 }
