@@ -9,7 +9,7 @@ class App extends Component {
     super(props)
     this.state={
       currentEquation: "0",
-      currentCounter: "",
+      // currentCounter: "",
       currentResult: "0",
       operatorFlag: false,
       commaFlag: false
@@ -18,7 +18,7 @@ class App extends Component {
 
   handleClick = (buttonName) => {
     let currentEquation = this.state.currentEquation
-    let currentCounter = this.state.currentCounter
+    let currentCounter = currentEquation.match( /[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g)
     let currentResult = this.state.currentResult
     let operatorFlag = this.state.operatorFlag
     let commaFlag = this.state.commaFlag
@@ -53,11 +53,12 @@ class App extends Component {
             break
       case  buttonName === "C":
             currentEquation = "0"
+            currentResult = "0"
             break
       case  buttonName === "=":
             const currentCalculation = currentEquation.replace(/÷/g, "/").replace(/×/g, "*")
             // currentResult = String(eval(currentEquation))
-            currentResult = String(Function('"use strict";return (' + currentCalculation + ')')())
+            currentResult = String((() => {'"use strict";return (' + currentCalculation + ')'})())
             break
       case  buttonName === ",":
             if(!this.state.commaFlag){
@@ -67,12 +68,15 @@ class App extends Component {
       case  buttonName === "DEL":
             currentEquation = currentEquation.slice(0, -1)
             break
-      case  buttonName === "+/-":
-            currentResult = currentResult.charAt(0) === '-' ? currentResult.substr(1) : '-' + currentResult
+      case  buttonName === "+/-":            
+            let lastDigit = currentEquation.match( /((\(-?)+[^÷|×|+|-]+(\d+)(?!.*\d)(\)?))|[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g )
+            currentEquation = lastDigit[0].charAt(0) === '(' 
+            ? currentEquation.replace( lastDigit[0] , lastDigit[0].slice(2, lastDigit[0].length - 1) )
+            : currentEquation.replace( /[^÷|×|+|-]+$/g , '(-' +  currentCounter  + ')')
             break
       case  buttonName === "%":
-            currentResult = String(currentResult / 100)
-            currentEquation = String(currentEquation / 100)
+        console.log(currentCounter)
+            currentEquation = currentEquation.replace( /[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g , currentCounter / 100)
             break
       default: // no default
             break
@@ -91,13 +95,13 @@ class App extends Component {
     ? operatorFlag = true
     : operatorFlag = false
     
-    this.setState({currentEquation, currentCounter, currentResult, operatorFlag, commaFlag})
+    this.setState({currentEquation, currentResult, operatorFlag, commaFlag})
   }
 
   render(){
     return(
       <div className="App">          
-      {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
+      <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre>
         <header className="App-header calculator">
           <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
           <Display className="calculator--display__result" currentNumber={this.state.currentResult}/>
