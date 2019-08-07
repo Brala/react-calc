@@ -9,7 +9,6 @@ class App extends Component {
     super(props)
     this.state={
       currentEquation: "0",
-      // currentCounter: "",
       currentResult: "0",
       operatorFlag: false,
       commaFlag: false
@@ -17,74 +16,82 @@ class App extends Component {
   }
 
   handleClick = (buttonName) => {
-    let currentEquation = this.state.currentEquation
-    let currentCounter = currentEquation.match( /[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g)
-    let currentResult = this.state.currentResult
-    let operatorFlag = this.state.operatorFlag
-    let commaFlag = this.state.commaFlag
-
+    let { currentEquation, currentResult, operatorFlag, commaFlag } = this.state
+    let currentCounter = currentEquation.match( /[^÷|×|+|(?!()-]+(\d*)(?!.*\d+)/g)
     switch(true){
-      case  buttonName==="0" ||
-            buttonName==="1" ||
-            buttonName==="2" ||
-            buttonName==="3" ||
-            buttonName==="4" ||
-            buttonName==="5" ||
-            buttonName==="6" ||
-            buttonName==="7" ||
-            buttonName==="8" ||
-            buttonName==="9" :
-        if(this.state.currentEquation!=="0") {
-        currentEquation += buttonName
-        }else{
-          currentEquation = buttonName
-        }      
-            break
+      case  buttonName === "0" ||
+            buttonName === "1" ||
+            buttonName === "2" ||
+            buttonName === "3" ||
+            buttonName === "4" ||
+            buttonName === "5" ||
+            buttonName === "6" ||
+            buttonName === "7" ||
+            buttonName === "8" ||
+            buttonName === "9" :
+              currentEquation = currentEquation.slice(-1) === ")" 
+              ? currentEquation += ( "×" + buttonName )
+              : currentEquation.slice(-1) === "-" ||
+                currentEquation.slice(-1) === "+" ||
+                currentEquation.slice(-1) === "÷" ||
+                currentEquation.slice(-1) === "×"
+                ? currentEquation += buttonName 
+                : currentEquation === "0"
+                  ? buttonName 
+                  : currentCounter[0]==="0"
+                    ? currentEquation + "." + buttonName
+                    : currentEquation += buttonName
+              break
       case  buttonName === "+" ||
             buttonName === "-" ||
             buttonName === "÷" ||
-            buttonName === "×":
-      if(!this.state.operatorFlag){
-          currentEquation += buttonName
-        }else{
-          const newNumber = currentEquation.slice(0, currentEquation.length - 1)
-          currentEquation = newNumber + buttonName
-        }
-            break
+            buttonName === "×" :
+              !this.state.operatorFlag
+              ? currentEquation += buttonName
+              : currentEquation = currentEquation.slice(0, currentEquation.length - 1) + buttonName
+              break
       case  buttonName === "C":
-            currentEquation = "0"
-            currentResult = "0"
-            break
+              currentEquation = "0"
+              currentResult = "0"
+              break
       case  buttonName === "=":
-            const currentCalculation = currentEquation.replace(/÷/g, "/").replace(/×/g, "*")
-            // currentResult = String(eval(currentEquation))
-            currentResult = String((() => {'"use strict";return (' + currentCalculation + ')'})())
-            break
+              let currentCalculation = currentEquation.replace(/÷/g, "/").replace(/×/g, "*")
+              currentCalculation = operatorFlag
+              ? currentCalculation.slice(0, -1) 
+              : currentCalculation
+              // currentResult = String(eval(currentCalculation))
+              currentResult = String(new Function( '"use strict";return (' + currentCalculation + ')')())
+              break
       case  buttonName === ",":
-            if(!this.state.commaFlag){
-              currentEquation += "."
-            }
-            break
+              currentEquation +=
+              (!this.state.commaFlag)
+              ? "."
+              : ""         
+              break
       case  buttonName === "DEL":
-            currentEquation = currentEquation.slice(0, -1)
-            break
+              currentEquation = currentEquation.length === 1 
+              ? "0"
+              : currentEquation.slice(-1) === ")"
+                ? currentEquation.replace( /\(-(?!.*\(-)/g ,'').slice(0, -1)
+                : currentEquation.slice(0, -1)
+              break
       case  buttonName === "+/-":            
-            let lastDigit = currentEquation.match( /((\(-?)+[^÷|×|+|-]+(\d+)(?!.*\d)(\)?))|[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g )
-            currentEquation = lastDigit[0].charAt(0) === '(' 
-            ? currentEquation.replace( lastDigit[0] , lastDigit[0].slice(2, lastDigit[0].length - 1) )
-            : currentEquation.replace( /[^÷|×|+|-]+$/g , '(-' +  currentCounter  + ')')
-            break
+              let lastDigit = currentEquation.match( /\(?-?(\d+\.)?\d+\)?$/g )
+              currentEquation = lastDigit !== null && lastDigit[0].charAt(0) === '(' 
+              ? currentEquation.replace( /\(?-?(\d*\.)?\d+\)?$/g , lastDigit[0].slice(2, lastDigit[0].length).replace(/\)/g, "") )
+              : currentEquation.replace( /[^÷|×|+|-]+$/g , '(-' +  currentCounter  + ')')
+              break
       case  buttonName === "%":
-        console.log(currentCounter)
-            currentEquation = currentEquation.replace( /[^÷|×|+|(?!()-]+(\d+)(?!.*\d)/g , currentCounter / 100)
-            break
+              currentEquation = currentEquation.replace( /[^÷|×|+|(?!()-]+(\d*)(?!.*\d+)/g , currentCounter / 100)
+              break
       default: // no default
-            break
+              break
     }
     
     // Check comma flag
     let lastCount = currentEquation.match( /[^÷|×|+|-]+$/g )
-    lastCount !== null && String(lastCount[0]).includes(".")
+    console.log(lastCount)
+    lastCount !== null && ( String(lastCount[0]).includes(".") || currentEquation.slice(-1) === ")" )
     ? commaFlag = true
     : commaFlag = false
     // Check operator flag
@@ -101,7 +108,7 @@ class App extends Component {
   render(){
     return(
       <div className="App">          
-      <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre>
+      {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
         <header className="App-header calculator">
           <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
           <Display className="calculator--display__result" currentNumber={this.state.currentResult}/>
