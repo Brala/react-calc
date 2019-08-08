@@ -1,4 +1,13 @@
-## React calculator app
+# React calculator app
+
+
+### things yet to improve:
+
+- Include Redux functionalities
+- keyboard keypress handling support
+- Modularize handleClick function
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
