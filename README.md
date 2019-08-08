@@ -1,12 +1,13 @@
-# React calculator app
+# React.js Calculator app
 
+Basic react calculator with keyboard support
 
 ### things yet to improve:
 
 - Include Redux functionalities
-- keyboard keypress handling support
+- Write result calculation by hand (without eval() or Function() support) / eval() errors handling
 - Modularize handleClick function
-
+- Add SCSS and TDD
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
