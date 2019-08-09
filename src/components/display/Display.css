@@ -1,11 +1,18 @@
-.calculator input{   
+.calculator #display{   
     width: 100%;
-    padding-right: 35px;
-    border: none;
+    /* border: none;
     text-align: right;  
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
+    position: relative;
+}
+.auto-scaling-text{
+    /* display: inline-block; */
+    position: absolute;
+    right: 0;
+    padding: 0 35px;
+    transform-origin: right center;
 }
 .calculator--display__equation{
     line-height: 104px;
