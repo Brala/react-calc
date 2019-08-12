@@ -1,6 +1,6 @@
 # React.js Calculator app
 
-Basic react calculator with keyboard support
+Basic react calculator with scalable display and keyboard support
 
 ### things yet to improve:
 

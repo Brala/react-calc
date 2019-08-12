@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import './Display.css';
 
-class AutoScalingText extends React.Component {
+class AutoScalingText extends Component {
   state = {
     scale: 1
   };
   
   componentDidUpdate() {
     const { scale } = this.state
-    console.log(scale)
+
     const node = this.node
     const parentNode = node.parentNode
-    
     const availableWidth = parentNode.offsetWidth
     const actualWidth = node.offsetWidth
     const actualScale = availableWidth / actualWidth
-    console.log(availableWidth)
-    console.log(actualWidth)
+
     if (scale === actualScale)
       return
     
