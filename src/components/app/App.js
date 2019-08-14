@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import store from './store'
+
+import { createStore, bindActionCreators, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { buttonsActions } from '../button/reducers/duck'
 import UniqueID from 'react-html-id';
 
 import Display from '../display/Display.js';
@@ -10,7 +15,12 @@ import Button from '../button/Button.js';
 
 /* eslint no-eval: 0 */
 
-const store = createStore(() => [], {}, applyMiddleware());
+window.store = store
+store.dispatch(buttonsActions.add({name:'lolo'}))
+
+// const buttonsActions = bindActionCreators({add: addButton, reset}, store.dispatch)
+// buttonsActions.add({htmlID: 'f',  name: 'action.name',   className: 'action.className'})
+// buttonsActions.reset()
 
 class App extends Component {
   constructor(props){
@@ -55,6 +65,7 @@ class App extends Component {
       return;
     }
     let keyChar = event.key
+    // translate keyboard operators into visually corresponding format for display
     keyChar = keyChar === "*" 
     ? keyChar = "×"
     : keyChar === "/"
@@ -106,6 +117,7 @@ class App extends Component {
               break
       case  buttonName === "="     ||
             buttonName === "Enter" :
+              // translate display operators into countable characters
               let currentCalculation = currentEquation.replace(/÷/g, "/").replace(/×/g, "*")
               currentCalculation = currentCalculation.slice(-1) === "."
               ? currentCalculation.slice(0, -1) 

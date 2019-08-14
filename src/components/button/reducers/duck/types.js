@@ -1,0 +1,7 @@
+const ADD_BUTTON = 'ADD_BUTTON'
+const RESET_BUTTONS = 'RESET_BUTTONS'
+
+export default {
+    ADD_BUTTON,
+    RESET_BUTTONS
+}
