@@ -7,16 +7,16 @@ import store from './store'
 import { createStore, bindActionCreators, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { buttonsActions } from '../button/reducers/duck'
+import { buttonsActions } from '../buttons/reducers/duck'
 import UniqueID from 'react-html-id';
 
 import Display from '../display/Display.js';
-import Button from '../button/Button.js';
+import Buttons from '../buttons/Buttons.js';
 
 /* eslint no-eval: 0 */
 
 window.store = store
-store.dispatch(buttonsActions.add({name:'lolo'}))
+// store.dispatch(buttonsActions.add({name:'testing'}))
 
 // const buttonsActions = bindActionCreators({add: addButton, reset}, store.dispatch)
 // buttonsActions.add({htmlID: 'f',  name: 'action.name',   className: 'action.className'})
@@ -75,6 +75,7 @@ class App extends Component {
   }
 
   handleClick = (buttonName) => {
+    console.log(buttonName)
     let { currentEquation, currentResult, operatorFlag, commaFlag } = this.state
     let currentNumber = currentEquation.match( /\d*\.?\d+\.?(?!.*\d)/g)
 
@@ -184,19 +185,7 @@ class App extends Component {
           <header className="App-header calculator">
             <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
             <Display className="calculator--display__result" currentNumber={this.state.currentResult}/>
-            <div className="calculator--buttons">
-              {
-                this.state.buttons.map((button, index)=>{
-                  return(<Button 
-                    key={button.id}
-                    id={button.htmlID}
-                    name={button.name}
-                    className={button.className}
-                    handleClick={this.handleClick}
-                    />
-                  )})
-              }
-            </div>
+            <Buttons handleClick={this.handleClick}/>
           </header>
         </div>
       </Provider>
@@ -208,7 +197,7 @@ Display.propTypes = {
   className: PropTypes.string.isRequired,
   currentNumber: PropTypes.string.isRequired
 }
-Button.propTypes = {
+Buttons.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired
