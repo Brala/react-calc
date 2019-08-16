@@ -8,7 +8,6 @@ class AutoScalingText extends Component {
   
   componentDidUpdate() {
     const { scale } = this.state
-
     const node = this.node
     const parentNode = node.parentNode
     const availableWidth = parentNode.offsetWidth
@@ -41,8 +40,7 @@ class AutoScalingText extends Component {
 class Display extends Component {
   render() {
     return (
-      <div type="text" id="display" className={this.props.className}  readOnly>
-        
+      <div id="display" className={this.props.className} readOnly>
         <AutoScalingText>{this.props.currentNumber}</AutoScalingText>
       </div>
     )

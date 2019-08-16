@@ -4,22 +4,10 @@ import './Button.css';
 
 class Buttons extends Component {
     runParentHandleClick = (button) => {
-        console.log(button)
-        this.props.handleClick(this.props.name)
+        this.props.handleClick(button)
     }
     render() {
         return (
-            // <button 
-            //     className={this.props.className}
-            //     onClick={this.runParentHandleClick}>
-            //         {this.props.name}
-            //     <div>
-                    
-            //         {/* {this.props.buttons.buttons.map(button => <span>{button.name}</span>)} */}
-            //         {/* {window.console.log(this.props.buttons.buttons)} */}
-            //     </div>
-            // </button>
-
             <div className="calculator--buttons">
                 {this.props.buttons.buttons.map((button, index)=>{
                     return(
@@ -28,7 +16,7 @@ class Buttons extends Component {
                             id={button.htmlID}
                             name={button.name}
                             className={button.className}
-                            onClick={this.runParentHandleClick}
+                            onClick={() => this.runParentHandleClick(button.name)}
                             >
                                 {button.name}
                         </button>
