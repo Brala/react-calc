@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { Provider } from 'react-redux';
-import store from './store'
+import { connect } from 'react-redux';
 
-import { createStore, bindActionCreators, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { buttonsActions } from '../buttons/reducers/duck'
+// import { createStore, /* applyMiddleware  */} from 'redux';
+// import rootReducer from './reducers';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import { buttonsActions } from '../buttons/reducers/duck'
+import { displayActions } from '../display/reducers/duck'
 import UniqueID from 'react-html-id';
 
 import Display from '../display/Display.js';
 import Buttons from '../buttons/Buttons.js';
 
 /* eslint no-eval: 0 */
-
-window.store = store
-
-
+// window.store = store
 // store.dispatch(buttonsActions.add({name:'testing'}))
-
-// const buttonsActions = bindActionCreators({add: addButton, reset}, store.dispatch)
-// buttonsActions.add({htmlID: 'f',  name: 'action.name',   className: 'action.className'})
-// buttonsActions.reset()
 
 class App extends Component {
   constructor(props){
     super(props)
     UniqueID.enableUniqueIds(this)
-    this.state={
-      currentEquation: "0",
-      currentResult: "0",
-      operatorFlag: false,
-      commaFlag: false,
-    }
   }
 
   componentDidMount() {
@@ -55,8 +42,7 @@ class App extends Component {
   }
 
   handleClick = (buttonName) => {
-    console.log(buttonName)
-    let { currentEquation, currentResult, operatorFlag, commaFlag } = this.state
+    let { currentEquation, currentResult, operatorFlag, commaFlag } = this.props.display
     let currentNumber = currentEquation.match( /\d*\.?\d+\.?(?!.*\d)/g)
 
     switch(true){
@@ -155,20 +141,23 @@ class App extends Component {
     : operatorFlag = false
     
     this.setState({currentEquation, currentResult, operatorFlag, commaFlag})
+    // this.props.display = { currentEquation, currentResult, operatorFlag, commaFlag }
+    this.props.update({ currentEquation, currentResult, operatorFlag, commaFlag })
   }
 
   render(){
     return(
-      <Provider store={store}>
         <div className="App" >          
         {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
           <header className="App-header calculator">
-            <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
-            <Display className="calculator--display__result" currentNumber={this.state.currentResult}/>
+            {/* <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
+            <Display className="calculator--display__result" currentNumber={this.state.currentResult}/> */}
+            <Display className="calculator--display__equation" currentNumber={this.props.display.currentEquation}/>
+            <Display className="calculator--display__result" currentNumber={this.props.display.currentResult}/>
             <Buttons handleClick={this.handleClick}/>
           </header>
+          {/* {console.log(this.props)} */}
         </div>
-      </Provider>
     );
   }
 }
@@ -178,9 +167,16 @@ Display.propTypes = {
   currentNumber: PropTypes.string.isRequired
 }
 Buttons.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
+  // name: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired
 }
 
-export default App;
+const mapStateToProps = state => ({
+  display: state.display,
+})
+const mapDispatchToProps = dispatch => ({
+  update: newStoreData => dispatch(displayActions.update(newStoreData))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps) (App)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Display.css';
 
 class AutoScalingText extends Component {
@@ -42,9 +43,14 @@ class Display extends Component {
     return (
       <div id="display" className={this.props.className} readOnly>
         <AutoScalingText>{this.props.currentNumber}</AutoScalingText>
+        {/* <span>{console.log(this.props)  }</span> */}
       </div>
     )
   }
 }
 
-export default Display;
+const mapStateToProps = state => ({
+  display: state.display,
+})
+
+export default connect(mapStateToProps, {}) (Display)

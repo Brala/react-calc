@@ -1,7 +1,7 @@
 import types from './types'
 
-const add = item => ({
-    type: types.ADD_BUTTON, ...item
+const update = item => ({
+    type: types.UPDATE_DISPLAY, ...item
 })
 
 const reset = () => ({
@@ -9,6 +9,6 @@ const reset = () => ({
 })
 
 export default {
-    add,
+    update,
     reset
 }

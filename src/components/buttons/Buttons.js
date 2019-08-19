@@ -22,6 +22,7 @@ class Buttons extends Component {
                         </button>
                     )})
                 }
+                {/* {console.log(this.props)  } */}
             </div>
         )
     }

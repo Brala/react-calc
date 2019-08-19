@@ -1,5 +1,5 @@
-import buttonsReducer from './reducers'
-export { default as buttonTypes } from './types'
-export { default as buttonsActions } from './actions'
+import displayReducer from './reducers'
+export { default as displayTypes } from './types'
+export { default as displayActions } from './actions'
 
-export default buttonsReducer
+export default displayReducer

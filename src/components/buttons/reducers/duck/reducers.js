@@ -1,10 +1,6 @@
 import types from './types'
 
-const INITIAL_STATE = {
-    currentEquation: "0",
-    currentResult: "0",
-    operatorFlag: false,
-    commaFlag: false,
+const INITIAL_BUTTONS = {
     buttons: [
       {id: 'this.nextUniqueId()', htmlID: 'clear', name: 'C', className: ''},
       {id: 'this.nextUniqueId()', htmlID: 'change sign', name: '+/-', className: ''},
@@ -29,7 +25,7 @@ const INITIAL_STATE = {
     ]
   }
   
-const buttonsReducer = (state = INITIAL_STATE, action) => {
+const buttonsReducer = (state = INITIAL_BUTTONS, action) => {
     switch (action.type) {
       case types.ADD_BUTTON:
         return {
