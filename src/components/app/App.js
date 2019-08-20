@@ -43,7 +43,25 @@ class App extends Component {
 
   handleClick = (buttonName) => {
     let { currentEquation, currentResult, operatorFlag, commaFlag } = this.props.display
-    let currentNumber = currentEquation.match( /\d*\.?\d+\.?(?!.*\d)/g)
+    let currentNumber = currentEquation.match( /\d*\.?\d+\.?(e-?)?\d*(?!.*\d)/g)
+
+    Number.prototype.noExponents= function(){
+      var data= String(this).split(/[eE]/);
+      if(data.length== 1) return data[0]; 
+  
+      var  z= '', sign= this<0? '-':'',
+      str= data[0].replace('.', ''),
+      mag= Number(data[1])+ 1;
+  
+      if(mag<0){
+          z= sign + '0.';
+          while(mag++) z += '0';
+          return z + str.replace(/^\-/,'');
+      }
+      mag -= str.length;  
+      while(mag--) z += '0';
+      return str + z;
+  }
 
     switch(true){
       case  buttonName === "0" ||
@@ -121,7 +139,7 @@ class App extends Component {
               : currentEquation.replace( /[^÷|×|+|(?!()-]+(\d*)(?!.*\d+)/g , '(-' +  currentNumber  + ')')
               break
       case  buttonName === "%":
-              currentEquation = currentEquation.replace( /\d*\.?\d+\.?(?!.*\d)/g , (currentNumber / 100) )
+              currentEquation = currentEquation.replace( /\d*\.?\d+\.?(e-?)?\d*(?!.*\d)/g , (currentNumber / 100) )
               break
       default: // no default
               break
@@ -150,13 +168,10 @@ class App extends Component {
         <div className="App" >          
         {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
           <header className="App-header calculator">
-            {/* <Display className="calculator--display__equation" currentNumber={this.state.currentEquation}/>
-            <Display className="calculator--display__result" currentNumber={this.state.currentResult}/> */}
             <Display className="calculator--display__equation" currentNumber={this.props.display.currentEquation}/>
             <Display className="calculator--display__result" currentNumber={this.props.display.currentResult}/>
             <Buttons handleClick={this.handleClick}/>
           </header>
-          {/* {console.log(this.props)} */}
         </div>
     );
   }

@@ -1,5 +1,5 @@
 
-import { createStore, bindActionCreators, applyMiddleware } from 'redux';
+import { createStore, /* bindActionCreators, applyMiddleware */ } from 'redux';
 import rootReducer from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 

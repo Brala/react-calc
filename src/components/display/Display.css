@@ -13,6 +13,7 @@
     right: 0;
     padding: 0 35px;
     transform-origin: right center;
+    white-space: nowrap;
 }
 .calculator--display__equation{
     line-height: 104px;

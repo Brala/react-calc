@@ -5,8 +5,7 @@ Also added redundant redux demonstration
 
 ### things yet to improve:
 
-- Include Redux functionalities
-- Write result calculation by hand (without eval() or Function() support) / eval() errors handling
+- Write result calculation by hand (without eval() or Function() support) / eval() errors handling, "-e" issues, etc.
 - Modularize handleClick function
 - Add SCSS and TDD
 
