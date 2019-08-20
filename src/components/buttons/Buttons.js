@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 import './Button.css';
 // import UniqueID from 'react-html-id';
 
-const Buttons = () => {
+const Buttons = props => {
     const buttons = useSelector(state => state.buttons)
 
-    console.log(buttons)
     return (
             <div className="calculator--buttons">
                 {buttons.buttons.map((button, index)=>{
@@ -16,7 +15,7 @@ const Buttons = () => {
                             id={button.htmlID}
                             name={button.name}
                             className={button.className}
-                            onClick={() => this.props.handleClick(button.name)}
+                            onClick={() => props.handleClick(button.name)}
                             >
                                 {button.name}
                         </button>
