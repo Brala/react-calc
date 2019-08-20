@@ -1,11 +1,11 @@
 # React.js Calculator app
 
 Basic react calculator with scalable display and keyboard support
-Also added redundant redux demonstration
+Also added redundant redux and hooks demonstration
 
 ### things yet to improve:
 
-- Write result calculation by hand (without eval() or Function() support) / eval() errors handling, "-e" issues, etc.
+- Write result calculation by hand (without eval() or Function() support)
 - Modularize handleClick function
 - Add SCSS and TDD
 

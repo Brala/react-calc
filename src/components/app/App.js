@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import { buttonsActions } from '../buttons/reducers/duck'
 import { displayActions } from '../display/reducers/duck'
-import UniqueID from 'react-html-id';
+// import UniqueID from 'react-html-id';
 
 import Display from '../display/Display.js';
 import Buttons from '../buttons/Buttons.js';
@@ -18,10 +18,10 @@ import Buttons from '../buttons/Buttons.js';
 // store.dispatch(buttonsActions.add({name:'testing'}))
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    UniqueID.enableUniqueIds(this)
-  }
+  // constructor(props){
+  //   super(props)
+  //   UniqueID.enableUniqueIds(this)
+  // }
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyPress);
@@ -43,25 +43,7 @@ class App extends Component {
 
   handleClick = (buttonName) => {
     let { currentEquation, currentResult, operatorFlag, commaFlag } = this.props.display
-    let currentNumber = currentEquation.match( /\d*\.?\d+\.?(e-?)?\d*(?!.*\d)/g)
-
-    Number.prototype.noExponents= function(){
-      var data= String(this).split(/[eE]/);
-      if(data.length== 1) return data[0]; 
-  
-      var  z= '', sign= this<0? '-':'',
-      str= data[0].replace('.', ''),
-      mag= Number(data[1])+ 1;
-  
-      if(mag<0){
-          z= sign + '0.';
-          while(mag++) z += '0';
-          return z + str.replace(/^\-/,'');
-      }
-      mag -= str.length;  
-      while(mag--) z += '0';
-      return str + z;
-  }
+    let currentNumber = currentEquation.match( /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g)
 
     switch(true){
       case  buttonName === "0" ||
@@ -133,13 +115,13 @@ class App extends Component {
                 : currentEquation.slice(0, -1)
               break
       case  buttonName === "+/-":
-              let lastDigit = currentEquation.match( /\(?-?(\d+\.)?\d+\.?\)?(?!.*\d)/g )
+              let lastDigit = currentEquation.match( /(\(-?)?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g )
               currentEquation = lastDigit !== null && lastDigit[0].charAt(0) === '(' 
-              ? currentEquation.replace( /\(?-?(\d+\.)?\d+\.?\)?(?!.*\d)/g , lastDigit[0].slice(2, lastDigit[0].length).replace(/\)/g, "") )
-              : currentEquation.replace( /[^÷|×|+|(?!()-]+(\d*)(?!.*\d+)/g , '(-' +  currentNumber  + ')')
+              ? currentEquation.replace( /\(?-?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g , lastDigit[0].slice(2, lastDigit[0].length).replace(/\)/g, "") )
+              : currentEquation.replace( /[^÷|×|+|(?!()-]+(\d*)(e-?)?\d*(?!.*\d+)/g , '(-' +  currentNumber  + ')')
               break
       case  buttonName === "%":
-              currentEquation = currentEquation.replace( /\d*\.?\d+\.?(e-?)?\d*(?!.*\d)/g , (currentNumber / 100) )
+              currentEquation = currentEquation.replace( /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g , (currentNumber / 100) )
               break
       default: // no default
               break
