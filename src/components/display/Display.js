@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import './Display.css';
 
 class AutoScalingText extends Component {
@@ -38,19 +38,12 @@ class AutoScalingText extends Component {
   }
 }
 
-class Display extends Component {
-  render() {
-    return (
-      <div id="display" className={this.props.className} readOnly>
-        <AutoScalingText>{this.props.currentNumber}</AutoScalingText>
-        {/* <span>{console.log(this.props)  }</span> */}
-      </div>
-    )
-  }
+const Display = props => {
+  return (
+          <div id="display" className={props.className} readOnly>
+            <AutoScalingText>{props.currentNumber}</AutoScalingText>
+          </div>
+  )
 }
 
-const mapStateToProps = state => ({
-  display: state.display,
-})
-
-export default connect(mapStateToProps, {}) (Display)
+export default Display

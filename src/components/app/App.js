@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React, { useEffect  } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-// import { createStore, /* applyMiddleware  */} from 'redux';
-// import rootReducer from './reducers';
 // import { composeWithDevTools } from 'redux-devtools-extension';
-// import { buttonsActions } from '../buttons/reducers/duck'
-import { displayActions } from '../display/reducers/duck'
-// import UniqueID from 'react-html-id';
+// import { displayActions } from '../display/reducers/duck'
 
 import Display from '../display/Display.js';
 import Buttons from '../buttons/Buttons.js';
@@ -17,33 +13,40 @@ import Buttons from '../buttons/Buttons.js';
 // window.store = store
 // store.dispatch(buttonsActions.add({name:'testing'}))
 
-class App extends Component {
-  // constructor(props){
-  //   super(props)
-  //   UniqueID.enableUniqueIds(this)
-  // }
+const App = props => {
+  const dispatch = useDispatch()
+  let { currentEquation, currentResult, operatorFlag, commaFlag } = useSelector(state => state.display)
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyPress);
-  }
 
-  handleKeyPress = (event) => {
+
+  const handleKeyPress = (event) => {
     if (event.ctrlKey || event.metaKey || event.shiftKey) {
       return;
     }
     let keyChar = event.key
     // translate keyboard operators into visually corresponding format for display
-    keyChar = keyChar === "*" 
+    keyChar = keyChar === "*"
     ? keyChar = "×"
     : keyChar === "/"
-      ? keyChar = "÷"
-      : keyChar
-    this.handleClick(keyChar)
+    ? keyChar = "÷"
+    : keyChar
+    // console.log(keyChar)
+    HandleClick(keyChar)
   }
 
-  handleClick = (buttonName) => {
-    let { currentEquation, currentResult, operatorFlag, commaFlag } = this.props.display
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+  
+  const HandleClick = (buttonName) => {
+    console.log(buttonName)
+    
+    // let { currentEquation, currentResult, operatorFlag, commaFlag } = props.display
     let currentNumber = currentEquation.match( /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g)
+
 
     switch(true){
       case  buttonName === "0" ||
@@ -73,7 +76,7 @@ class App extends Component {
             buttonName === "-" ||
             buttonName === "÷" ||
             buttonName === "×" :
-              !this.state.operatorFlag
+              !operatorFlag
               ? currentEquation += buttonName
               : currentEquation = currentEquation.slice(0, currentEquation.length - 1) + buttonName
               break
@@ -96,14 +99,14 @@ class App extends Component {
       case  buttonName === "," ||
             buttonName === "." :
               currentEquation +=
-              this.state.commaFlag
+              commaFlag
               ? ""
               : currentEquation.slice(-1) === "-" ||
                 currentEquation.slice(-1) === "+" ||
                 currentEquation.slice(-1) === "÷" ||
                 currentEquation.slice(-1) === "×"
                 ? "0."
-                : "."        
+                : "."
               break
       case  buttonName === "DEL"       ||
             buttonName === "Delete"    ||
@@ -139,24 +142,22 @@ class App extends Component {
     currentEquation.slice(-1) === "×"
     ? operatorFlag = true
     : operatorFlag = false
-    
-    this.setState({currentEquation, currentResult, operatorFlag, commaFlag})
-    // this.props.display = { currentEquation, currentResult, operatorFlag, commaFlag }
-    this.props.update({ currentEquation, currentResult, operatorFlag, commaFlag })
   }
+  
+  useEffect(() => {
+    dispatch({ type:'UPDATE_DISPLAY', currentEquation, currentResult, operatorFlag, commaFlag})
+  }, [HandleClick])
 
-  render(){
-    return(
-        <div className="App" >          
-        {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
-          <header className="App-header calculator">
-            <Display className="calculator--display__equation" currentNumber={this.props.display.currentEquation}/>
-            <Display className="calculator--display__result" currentNumber={this.props.display.currentResult}/>
-            <Buttons handleClick={this.handleClick}/>
-          </header>
-        </div>
-    );
-  }
+  return (
+    <div className="App" >
+    {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
+      <header className="App-header calculator">
+        <Display className="calculator--display__equation" currentNumber={currentEquation}/>
+        <Display className="calculator--display__result" currentNumber={currentResult}/>
+        <Buttons handleClick={HandleClick}/>
+      </header>
+    </div>
+  )
 }
 
 Display.propTypes = {
@@ -169,11 +170,4 @@ Buttons.propTypes = {
   handleClick: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-  display: state.display,
-})
-const mapDispatchToProps = dispatch => ({
-  update: newStoreData => dispatch(displayActions.update(newStoreData))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps) (App)
+export default App
