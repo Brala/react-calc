@@ -39,7 +39,7 @@ const buttonsReducer = (state = INITIAL_BUTTONS, action) => {
         }
       case types.RESET_BUTTONS:
         return {
-          ...state, buttons: []
+          ...state, buttons: [ ]
         }
       default:
         return state

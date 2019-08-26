@@ -17,8 +17,6 @@ const App = props => {
   const dispatch = useDispatch()
   let { currentEquation, currentResult, operatorFlag, commaFlag } = useSelector(state => state.display)
 
-
-
   const handleKeyPress = (event) => {
     if (event.ctrlKey || event.metaKey || event.shiftKey) {
       return;
@@ -30,7 +28,6 @@ const App = props => {
     : keyChar === "/"
     ? keyChar = "÷"
     : keyChar
-    // console.log(keyChar)
     HandleClick(keyChar)
   }
 
@@ -39,14 +36,10 @@ const App = props => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [handleKeyPress]);
+  });
   
   const HandleClick = (buttonName) => {
-    console.log(buttonName)
-    
-    // let { currentEquation, currentResult, operatorFlag, commaFlag } = props.display
     let currentNumber = currentEquation.match( /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g)
-
 
     switch(true){
       case  buttonName === "0" ||
@@ -142,11 +135,9 @@ const App = props => {
     currentEquation.slice(-1) === "×"
     ? operatorFlag = true
     : operatorFlag = false
-  }
-  
-  useEffect(() => {
+
     dispatch({ type:'UPDATE_DISPLAY', currentEquation, currentResult, operatorFlag, commaFlag})
-  }, [HandleClick])
+  }
 
   return (
     <div className="App" >

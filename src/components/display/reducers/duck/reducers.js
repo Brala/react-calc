@@ -24,10 +24,6 @@ const displayReducer = (state = INITIAL_DISPLAY, action) => {
         //   className: action.className
         //   }]
       }
-    case types.RESET_BUTTONS:
-      return {
-        ...state, buttons: []
-      }
     default:
       return state
   }

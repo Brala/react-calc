@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { useSelector } from 'react-redux';
 import './Display.css';
 
 class AutoScalingText extends Component {
