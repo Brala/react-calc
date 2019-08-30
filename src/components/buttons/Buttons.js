@@ -1,4 +1,4 @@
-import React, { setState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Button.css';
 import { useTrail, animated } from 'react-spring'
@@ -27,7 +27,7 @@ const Buttons = props => {
             style={{ ...rest, 
                 transform: x.interpolate(x => `scale(${x})`), 
                 // backgroundColor: buttons[index].hover && '#f988bd63',
-                textShadow: buttons[index].hover && '1px 2px 3px #00000093',
+                textShadow: buttons[index].hover && '2px 1px 2px #f988bdc2',
             }}
             onClick={() => props.handleClick(buttons[index].name)}
             onMouseOver={toggleHover}

@@ -45,17 +45,17 @@ const App = props => {
     let currentNumber = currentEquation.match(/\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g)
 
     switch (true) {
-      case buttonName === "0" ||
-        buttonName === "1" ||
-        buttonName === "2" ||
-        buttonName === "3" ||
-        buttonName === "4" ||
-        buttonName === "5" ||
-        buttonName === "6" ||
-        buttonName === "7" ||
-        buttonName === "8" ||
-        buttonName === "9":
-        currentEquation = currentEquation.slice(-1) === ")"
+      case buttonName === "0" 
+        || buttonName === "1"
+        || buttonName === "2"
+        || buttonName === "3"
+        || buttonName === "4"
+        || buttonName === "5"
+        || buttonName === "6"
+        || buttonName === "7"
+        || buttonName === "8"
+        || buttonName === "9"
+        : currentEquation = currentEquation.slice(-1) === ")"
           ? currentEquation += ("×" + buttonName)
           : currentEquation.slice(-1) === "-" ||
             currentEquation.slice(-1) === "+" ||
@@ -68,21 +68,21 @@ const App = props => {
                 ? currentEquation + "." + buttonName
                 : currentEquation += buttonName
         break
-      case buttonName === "+" ||
-        buttonName === "-" ||
-        buttonName === "÷" ||
-        buttonName === "×":
-        !operatorFlag
+      case buttonName === "+" 
+        || buttonName === "-" 
+        || buttonName === "÷" 
+        || buttonName === "×"
+        : !operatorFlag
           ? currentEquation += buttonName
           : currentEquation = currentEquation.slice(0, currentEquation.length - 1) + buttonName
         break
-      case buttonName === "C" ||
-        buttonName === "c":
-        currentEquation = "0"
-        currentResult = "0"
+      case buttonName === "C" 
+        || buttonName === "c"
+        : currentEquation = "0"
+          currentResult = "0"
         break
-      case buttonName === "=" ||
-        buttonName === "Enter":
+      case buttonName === "=" 
+        || buttonName === "Enter":
         // translate display operators into countable characters
         let currentCalculation = currentEquation.replace(/÷/g, "/").replace(/×/g, "*")
         currentCalculation = currentCalculation.slice(-1) === "."
@@ -92,29 +92,29 @@ const App = props => {
             : currentCalculation
         currentResult = String(eval(currentCalculation))
         break
-      case buttonName === "," ||
-        buttonName === ".":
-        currentEquation +=
-          commaFlag
+      case buttonName === "," 
+        || buttonName === "."
+        : currentEquation 
+        += commaFlag
             ? ""
-            : currentEquation.slice(-1) === "-" ||
-              currentEquation.slice(-1) === "+" ||
-              currentEquation.slice(-1) === "÷" ||
-              currentEquation.slice(-1) === "×"
+            : currentEquation.slice(-1) === "-" 
+            || currentEquation.slice(-1) === "+" 
+            || currentEquation.slice(-1) === "÷" 
+            || currentEquation.slice(-1) === "×"
               ? "0."
               : "."
         break
-      case buttonName === "DEL" ||
-        buttonName === "Delete" ||
-        buttonName === "Backspace":
-        currentEquation = currentEquation.length === 1
+      case buttonName === "DEL" 
+        || buttonName === "Delete" 
+        || buttonName === "Backspace"
+        : currentEquation = currentEquation.length === 1
           ? "0"
           : currentEquation.slice(-1) === ")"
             ? currentEquation.replace(/\(-(?!.*\(-)/g, '').slice(0, -1)
             : currentEquation.slice(0, -1)
         break
-      case buttonName === "+/-":
-        let lastDigit = currentEquation.match(/(\(-?)?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g)
+      case buttonName === "+/-"
+        : let lastDigit = currentEquation.match(/(\(-?)?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g)
         currentEquation = lastDigit !== null && lastDigit[0].charAt(0) === '('
           ? currentEquation.replace(/\(?-?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g, lastDigit[0].slice(2, lastDigit[0].length).replace(/\)/g, ""))
           : currentEquation.replace(/[^÷|×|+|(?!()-]+(\d*)(e-?)?\d*(?!.*\d+)/g, '(-' + currentNumber + ')')
@@ -128,14 +128,16 @@ const App = props => {
 
     // Check comma flag
     const lastCount = currentEquation.match(/[^÷|×|+|-]+$/g)
-    lastCount !== null && (String(lastCount[0]).includes(".") || currentEquation.slice(-1) === ")")
+    lastCount !== null 
+    && (String(lastCount[0]).includes(".") 
+    || currentEquation.slice(-1) === ")")
       ? commaFlag = true
       : commaFlag = false
     // Check operator flag
-    currentEquation.slice(-1) === "+" ||
-      currentEquation.slice(-1) === "-" ||
-      currentEquation.slice(-1) === "÷" ||
-      currentEquation.slice(-1) === "×"
+    currentEquation.slice(-1) === "+" 
+    || currentEquation.slice(-1) === "-" 
+    || currentEquation.slice(-1) === "÷" 
+    || currentEquation.slice(-1) === "×"
       ? operatorFlag = true
       : operatorFlag = false
 

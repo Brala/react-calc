@@ -6,8 +6,9 @@
     color: #616161;
     background-color: #ffffff;   
     font-family: 'Samsung Sharp Sans Regular';
-    transition: text-shadow 0.25s;
     cursor: pointer;
+    transition: text-shadow 0.1s;
+    will-change: transform, text-shadow;
 }
 
 button.calculator--buttons--button__bold{
