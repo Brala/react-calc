@@ -6,12 +6,11 @@
     color: #616161;
     background-color: #ffffff;   
     font-family: 'Samsung Sharp Sans Regular';
+    transition: text-shadow 0.25s;
+    cursor: pointer;
 }
 
 button.calculator--buttons--button__bold{
-    /* line-height: 16.6666666%;
-    height: 16.6666666%; */
-    font-family: 'Samsung Sharp Sans Bold';    
-    /* font-size: 35px; */
+    font-family: 'Samsung Sharp Sans Bold';
     background-color: #d7d7d7;
 }

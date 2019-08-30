@@ -18,7 +18,7 @@ const App = props => {
   const dispatch = useDispatch()
   let { currentEquation, currentResult, operatorFlag, commaFlag } = useSelector(state => state.display)
 
-  const fade = useSpring({ from: { transform: `translate3d(0,-50px,0)` }, transform: `translate3d(0,0,0)`})
+  const slideDown = useSpring({ from: { transform: `translate3d(0,-50px,0)`, opacity: 0 }, transform: `translate3d(0,0,0)`, opacity: 1})
 
   const handleKeyPress = (event) => {
     if (event.ctrlKey || event.metaKey || event.shiftKey) {
@@ -143,7 +143,7 @@ const App = props => {
   }
 
   return (
-    <animated.div className="App"  style={fade}  >
+    <animated.div className="App" style={slideDown}>
       {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
       <header className="App-header calculator">
         <Display className="calculator--display__equation" currentNumber={currentEquation} />
