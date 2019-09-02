@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './Button.css';
+import './Button.scss';
 import { useTrail, animated } from 'react-spring'
 // import UniqueID from 'react-html-id';
 

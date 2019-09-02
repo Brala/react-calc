@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
+import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { animated, useSpring } from 'react-spring';
 
@@ -146,8 +146,8 @@ const App = props => {
 
   return (
     <animated.div className="App" style={slideDown}>
-      {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(this.state, null, 2)}</pre> */}
-      <header className="App-header calculator">
+      {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(useSelector(state => state.display), null, 2)}</pre> */}
+      <header className="calculator">
         <Display className="calculator--display__equation" currentNumber={currentEquation} />
         <Display className="calculator--display__result" currentNumber={currentResult} />
         <Buttons handleClick={HandleClick} />

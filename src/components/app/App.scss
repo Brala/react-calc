@@ -5,14 +5,12 @@
   src: local('Samsung Sharp Sans Regular'), url('../../assets/fonts/samsungsharpsans.woff') format('woff');
   }
   
-  
   @font-face {
   font-family: 'Samsung Sharp Sans Medium';
   font-style: normal;
   font-weight: normal;
   src: local('Samsung Sharp Sans Medium'), url('../../assets/fonts/samsungsharpsans-medium.woff') format('woff');
   }
-  
   
   @font-face {
   font-family: 'Samsung Sharp Sans Bold';
@@ -36,11 +34,6 @@ body {
   overflow: hidden
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .App {
   text-align: center;
   width: 100%;
@@ -50,7 +43,7 @@ code {
   align-items: center;
 }
 
-.App-header {
+.calculator{
   background-color: #ffffff;
   width: 372px;
   max-width: 100%;
@@ -59,14 +52,12 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   font-size: calc(10px + 2vmin);
-  /* color: white; */
   -webkit-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
   -moz-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
   box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-}
 
-.calculator--buttons{
-  height: calc(100% - 104px);
+  &--buttons{
+    height: calc(100% - 104px);
+  }
 }

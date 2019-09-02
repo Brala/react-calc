@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Display.css';
+import './Display.scss';
 
 class AutoScalingText extends Component {
   state = {

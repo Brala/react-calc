@@ -1,4 +1,4 @@
-.calculator--buttons button{
+.calculator--buttons--button{
     width: 25%;
     height: 16.6666666%;
     font-size: 25px; 
@@ -9,9 +9,9 @@
     cursor: pointer;
     transition: text-shadow 0.1s;
     will-change: transform, text-shadow;
-}
-
-button.calculator--buttons--button__bold{
-    font-family: 'Samsung Sharp Sans Bold';
-    background-color: #d7d7d7;
+    &__bold{
+        @extend .calculator--buttons--button;
+        font-family: 'Samsung Sharp Sans Bold';
+        background-color: #d7d7d7;
+    }
 }

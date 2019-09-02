@@ -7,7 +7,7 @@ Also added redundant redux, spring-library and hooks demonstration
 
 - Write result calculation by hand (without eval() or Function() support)
 - Modularize handleClick function
-- Add SCSS and TDD
+- Add SCSS and unit tests
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
