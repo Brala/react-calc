@@ -1,11 +1,5 @@
-.calculator--display{   
-    
+.calculator--display{
     width: 100%;
-    /* border: none;
-    text-align: right;  
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
     position: relative;
 
     &__equation{
@@ -24,12 +18,12 @@
         color: #fa99c9;
         font-size: 40px;
     }
-}
-.auto-scaling-text{
-    /* display: inline-block; */
-    position: absolute;
-    right: 0;
-    padding: 0 35px;
-    transform-origin: right center;
-    white-space: nowrap;
+
+    .auto-scaling-text{
+        position: absolute;
+        right: 0;
+        padding: 0 35px;
+        transform-origin: right center;
+        white-space: nowrap;
+    }
 }

@@ -14,7 +14,7 @@ const Buttons = props => {
       opacity: 1, x: 1,
     })
     const toggleHover = (event) => dispatch({ type: 'TOGGLE_HOVER_BUTTON', index: event.target.getAttribute('data-key') });
-
+ 
     return (
         <div className="calculator--buttons">
         {trail.map(({ x, ...rest }, index) => (

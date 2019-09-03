@@ -31,33 +31,35 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: url("../../assets/img/calc_desktop_background.jpg");
-  overflow: hidden
-}
+  overflow: hidden;
 
-.App {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.calculator{
-  background-color: #ffffff;
-  width: 372px;
-  max-width: 100%;
-  height: 662px;
-  max-height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  -webkit-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-  -moz-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-  box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-
-  &--buttons{
-    height: calc(100% - 104px);
+  .App {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .calculator{
+      background-color: #ffffff;
+      width: 372px;
+      max-width: 100%;
+      height: 662px;
+      max-height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      -webkit-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+      -moz-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+      box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
+    
+      &--buttons{
+        height: calc(100% - 104px);
+      }
+    }
   }
+
 }
+

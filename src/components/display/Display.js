@@ -17,20 +17,17 @@ class AutoScalingText extends Component {
     if (scale === actualScale)
       return
 
-    if (actualScale < 1) {
-      this.setState({ scale: actualScale })
-    } else if (scale < 1) {
-      this.setState({ scale: 1 })
-    }
+    (actualScale < 1 && this.setState({ scale: actualScale }))
+    || (scale < 1  && this.setState({ scale: 1 }))
   }
 
-  copyToClipboard = (e) => {
-    console.log(this)
-    this.select();
-    document.execCommand('copy');
-    e.target.focus();
-    // this.setState({ copySuccess: 'Copied!' });
-  };
+  // copyToClipboard = (e) => {
+  //   console.log(this)
+  //   this.select();
+  //   document.execCommand('copy');
+  //   e.target.focus();
+  //   // this.setState({ copySuccess: 'Copied!' });
+  // };
   
   render() {
     const { scale } = this.state
@@ -40,7 +37,7 @@ class AutoScalingText extends Component {
         className="auto-scaling-text"
         style={{ transform: `scale(${scale},${scale})` }}
         ref={node => this.node = node}
-        onClick={this.copyToClipboard}
+        // onClick={this.copyToClipboard}
       >{this.props.children}</div>
     )
   }

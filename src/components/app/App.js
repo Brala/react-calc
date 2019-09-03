@@ -14,7 +14,7 @@ import Buttons from '../buttons/Buttons.js';
 // window.store = store
 // store.dispatch(buttonsActions.add({name:'testing'}))
 
-const App = props => {
+const App = () => {
   const dispatch = useDispatch()
   let { currentEquation, currentResult, operatorFlag, commaFlag } = useSelector(state => state.display)
 
