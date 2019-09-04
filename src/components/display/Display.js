@@ -45,7 +45,7 @@ class AutoScalingText extends Component {
 
 const Display = props => {
   return (
-          <div id="display" className={props.className} readOnly>
+          <div id="display" data-test="display" className={props.className} readOnly>
             <AutoScalingText>{props.currentNumber}</AutoScalingText>
           </div>
   )

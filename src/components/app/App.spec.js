@@ -6,16 +6,28 @@ import sinon from 'sinon'
 import App from './App'
 import { expect } from 'chai'
 
+const setUp = () => {
+    const component = mount(<Provider store={store}><App /></Provider>)
+    return component
+}
+const findByTestAttr = (component, attribute) => {
+    const testAttribute = component.find(`[data-test='${attribute}']`)
+    return testAttribute
+}
+
 describe('<App />', () => {
 
-    it('renders calculator', () => {
-        const component = mount(<Provider store={store}><App /></Provider>)
-        // console.log(component.debug())
-        const wrapper = component.find('.calculator')
-        // console.log(wrapper)
-        expect(component.find('.calculator')).to.have.lengthOf(1)
-        expect(wrapper.length).to.equal(1)
+    let component;
+    beforeEach(() => {
+        component = setUp();
     })
-    it('renders', ()=>{expect(1).to.eql(1)})
+    it('renders both displays', () => {
+        // console.log(component.debug())
+        const wrapper = findByTestAttr(component, 'display')
+        expect(wrapper.length).to.equal(2)
+    })
+    it('renders buttons', () => {
+        expect(findByTestAttr(component, 'calculator--buttons')).to.have.lengthOf(1)
+    })
 
 })

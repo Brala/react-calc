@@ -9,14 +9,14 @@ const Buttons = props => {
     const buttons = useSelector(state => state.buttons.buttons)
 
     const trail = useTrail(buttons.length, {
-      config: { mass: 5, tension: 5000, friction: 400 },
+      config: { mass: 1, tension: 10000, friction: 300 },
       from: { opacity: 1, x: 0 },
       opacity: 1, x: 1,
     })
     const toggleHover = (event) => dispatch({ type: 'TOGGLE_HOVER_BUTTON', index: event.target.getAttribute('data-key') });
- 
+    // +
     return (
-        <div className="calculator--buttons">
+        <div className="calculator--buttons" data-test="calculator--buttons">
         {trail.map(({ x, ...rest }, index) => (
           <animated.button
             key={buttons[index].name}// 'this.nextUniqueId()'
@@ -24,6 +24,7 @@ const Buttons = props => {
             id={buttons[index].htmlID}
             name={buttons[index].name}
             className={buttons[index].className}
+            
             style={{ ...rest, 
                 transform: x.interpolate(x => `scale(${x})`), 
                 // backgroundColor: buttons[index].hover && '#f988bd63',
