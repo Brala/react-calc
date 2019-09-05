@@ -1,19 +1,21 @@
-import types from './types'
+import types from "./types";
 
 const add = item => ({
-    type: types.ADD_BUTTON, ...item
-})
+  type: types.ADD_BUTTON,
+  ...item
+});
 
 const hover = item => ({
-    type: types.TOGGLE_HOVER_BUTTON, ...item
-})
+  type: types.TOGGLE_HOVER_BUTTON,
+  ...item
+});
 
 const reset = () => ({
-    type: types.RESET_BUTTONS
-})
+  type: types.RESET_BUTTONS
+});
 
 export default {
-    add,
-    hover,
-    reset
-}
+  add,
+  hover,
+  reset
+};
