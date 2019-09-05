@@ -15,14 +15,7 @@ const displayReducer = (state = INITIAL_DISPLAY, action) => {
         currentEquation: action.currentEquation, 
         currentResult: action.currentResult, 
         operatorFlag: action.operatorFlag, 
-        commaFlag: action.commaFlag
-        // buttons: [...state.buttons, 
-        //   {
-        //   id: 'this.nextUniqueId()', 
-        //   htmlID: action.htmlID, 
-        //   name: action.name, 
-        //   className: action.className
-        //   }]
+        commaFlag: action.commaFlag,
       }
     default:
       return state

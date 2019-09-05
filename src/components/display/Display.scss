@@ -5,7 +5,7 @@
     &__equation{
         @extend .calculator--display;
         line-height: 104px;
-        height: 15.7%;
+        height: 104px;
         background-color: #fdd7ea;
         color: #f988bd;
         font-size: 20px;
@@ -14,7 +14,7 @@
     &__result{
         @extend .calculator--display;
         line-height: 94px;
-        height: 14.2%;
+        height: 94px;
         color: #fa99c9;
         font-size: 40px;
     }

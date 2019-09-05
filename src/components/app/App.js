@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { animated, useSpring } from 'react-spring';
-
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import { displayActions } from '../display/reducers/duck'
 
@@ -11,8 +10,6 @@ import Display from '../display/Display.js';
 import Buttons from '../buttons/Buttons.js';
 
 /* eslint no-eval: 0 */
-// window.store = store
-// store.dispatch(buttonsActions.add({name:'testing'}))
 
 const App = () => {
   const dispatch = useDispatch()
@@ -142,7 +139,9 @@ const App = () => {
       : operatorFlag = false
 
     dispatch({ type: 'UPDATE_DISPLAY', currentEquation, currentResult, operatorFlag, commaFlag })
-  }
+  } 
+  
+  const checkProps = [{slideDown, dispatch, currentEquation, currentResult, operatorFlag, commaFlag}]
 
   return (
     <animated.div className="App" style={slideDown}>
@@ -150,7 +149,7 @@ const App = () => {
       <header className="calculator">
         <Display className="calculator--display__equation" currentNumber={currentEquation} />
         <Display className="calculator--display__result" currentNumber={currentResult} />
-        <Buttons handleClick={HandleClick} />
+        <Buttons handleClick={HandleClick} checkProps={checkProps}/>
       </header>
     </animated.div>
   )
@@ -161,9 +160,15 @@ Display.propTypes = {
   currentNumber: PropTypes.string.isRequired
 }
 Buttons.propTypes = {
-  // id: PropTypes.string.isRequired,
-  // name: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  checkProps: PropTypes.arrayOf(PropTypes.shape({
+      slideDown: PropTypes.object.isRequired,
+      dispatch: PropTypes.func.isRequired,
+      currentEquation: PropTypes.string.isRequired, 
+      currentResult: PropTypes.string.isRequired, 
+      operatorFlag: PropTypes.bool.isRequired, 
+      commaFlag: PropTypes.bool.isRequired
+    }))
 }
 
 export default App
