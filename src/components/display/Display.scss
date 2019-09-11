@@ -1,29 +1,30 @@
-.calculator--display{
-    width: 100%;
-    position: relative;
+.calculator--display {
+  width: 100%;
+  position: relative;
 
-    &__equation{
-        @extend .calculator--display;
-        line-height: 104px;
-        height: 104px;
-        background-color: #fdd7ea;
-        color: #f988bd;
-        font-size: 20px;
-        font-family: 'Samsung Sharp Sans Bold';
-    }
-    &__result{
-        @extend .calculator--display;
-        line-height: 94px;
-        height: 94px;
-        color: #fa99c9;
-        font-size: 40px;
-    }
+  &__equation {
+    @extend .calculator--display;
+    line-height: 104px;
+    height: 104px;
+    background-color: #fdd7ea;
+    color: #f988bd;
+    font-size: 20px;
+    font-family: "Samsung Sharp Sans Bold";
+  }
+  &__result {
+    @extend .calculator--display;
+    line-height: 94px;
+    height: 94px;
+    background-color: #ffffff;
+    color: #fa99c9;
+    font-size: 40px;
+  }
 
-    .auto-scaling-text{
-        position: absolute;
-        right: 0;
-        padding: 0 35px;
-        transform-origin: right center;
-        white-space: nowrap;
-    }
+  .auto-scaling-text {
+    position: absolute;
+    right: 0;
+    padding: 0 35px;
+    transform-origin: right center;
+    white-space: nowrap;
+  }
 }

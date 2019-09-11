@@ -1,3 +1,6 @@
+/* eslint-disable no-nested-ternary */
+/* eslint no-eval: 0 */
+/* eslint react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }] */
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./App.scss";
@@ -6,10 +9,8 @@ import { animated, useSpring } from "react-spring";
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import { displayActions } from '../display/reducers/duck'
 
-import Display from "../display/Display.js";
-import Buttons from "../buttons/Buttons.js";
-
-/* eslint no-eval: 0 */
+import Display from "../display/Display";
+import Buttons from "../buttons/Buttons";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,16 @@ const App = () => {
 
   const slideDown = useSpring({
     from: { transform: `translate3d(0,-50px,0)`, opacity: 0 },
+    transform: `translate3d(0,0,0)`,
+    opacity: 1
+  });
+  const slideLeft = useSpring({
+    from: { transform: `translate3d(-250px,0,0)`, opacity: 0 },
+    transform: `translate3d(0,0,0)`,
+    opacity: 1
+  });
+  const slideRight = useSpring({
+    from: { transform: `translate3d(250px,0,0)`, opacity: 0 },
     transform: `translate3d(0,0,0)`,
     opacity: 1
   });
@@ -46,8 +57,11 @@ const App = () => {
   });
 
   const HandleClick = buttonName => {
-    let currentNumber = currentEquation.match(/\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g);
+    const currentNumber = currentEquation.match(
+      /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g
+    );
 
+    //  ("×" + buttonName))
     switch (true) {
       case buttonName === "0" ||
         buttonName === "1" ||
@@ -61,7 +75,7 @@ const App = () => {
         buttonName === "9":
         currentEquation =
           currentEquation.slice(-1) === ")"
-            ? (currentEquation += "×" + buttonName)
+            ? (currentEquation += `×${buttonName}`)
             : currentEquation.slice(-1) === "-" ||
               currentEquation.slice(-1) === "+" ||
               currentEquation.slice(-1) === "÷" ||
@@ -70,7 +84,7 @@ const App = () => {
             : currentEquation === "0"
             ? buttonName
             : currentNumber[0] === "0"
-            ? currentEquation + "." + buttonName
+            ? currentEquation.buttonName
             : (currentEquation += buttonName);
         break;
       case buttonName === "+" ||
@@ -87,7 +101,7 @@ const App = () => {
         currentEquation = "0";
         currentResult = "0";
         break;
-      case buttonName === "=" || buttonName === "Enter":
+      case buttonName === "=" || buttonName === "Enter": {
         // translate display operators into countable characters
         let currentCalculation = currentEquation
           .replace(/÷/g, "/")
@@ -100,6 +114,7 @@ const App = () => {
             : currentCalculation;
         currentResult = String(eval(currentCalculation));
         break;
+      }
       case buttonName === "," || buttonName === ".":
         currentEquation += commaFlag
           ? ""
@@ -120,8 +135,8 @@ const App = () => {
             ? currentEquation.replace(/\(-(?!.*\(-)/g, "").slice(0, -1)
             : currentEquation.slice(0, -1);
         break;
-      case buttonName === "+/-":
-        let lastDigit = currentEquation.match(
+      case buttonName === "+/-": {
+        const lastDigit = currentEquation.match(
           /(\(-?)?(\d+\.)?\d+(e-?)?\d*\.?\)?(?!.*\d)/g
         );
         currentEquation =
@@ -132,9 +147,10 @@ const App = () => {
               )
             : currentEquation.replace(
                 /[^÷|×|+|(?!()-]+(\d*)(e-?)?\d*(?!.*\d+)/g,
-                "(-" + currentNumber + ")"
+                `(-${currentNumber})`
               );
         break;
+      }
       case buttonName === "%":
         currentEquation = currentEquation.replace(
           /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g,
@@ -183,14 +199,16 @@ const App = () => {
   return (
     <animated.div className="App" style={slideDown}>
       {/* <pre style={{fontSize: '10px'}}>{JSON.stringify(useSelector(state => state.display), null, 2)}</pre> */}
-      <header className="calculator">
+      <header className="calculator" style={slideRight}>
         <Display
           className="calculator--display__equation"
           currentNumber={currentEquation}
+          style={slideRight}
         />
         <Display
           className="calculator--display__result"
           currentNumber={currentResult}
+          style={slideLeft}
         />
         <Buttons handleClick={HandleClick} checkProps={checkProps} />
       </header>

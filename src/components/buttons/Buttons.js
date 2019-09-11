@@ -19,7 +19,16 @@ const Buttons = props => {
       type: "TOGGLE_HOVER_BUTTON",
       index: event.target.getAttribute("data-key")
     });
-  // +
+
+  // const divStyle = {
+  //   position: "absolute",
+  //   width: "15rem",
+  //   height: "15rem",
+  //   zIndex: "4",
+  //   borderRadius: "50%",
+  //   transform: "translate3d(-50%, -50%, 0)"
+  // };
+
   return (
     <div className="calculator--buttons" data-test="calculator--buttons">
       {trail.map(({ x, ...rest }, index) => (
@@ -42,6 +51,7 @@ const Buttons = props => {
           {buttons[index].name}
         </animated.button>
       ))}
+      {/* <div id="light" style={divStyle} /> */}
     </div>
   );
 };

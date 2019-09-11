@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import "./Display.scss";
 
 class AutoScalingText extends Component {
-  state = {
-    scale: 1
-  };
+  constructor() {
+    super();
+    this.state = {
+      scale: 1
+    };
+  }
 
   componentDidUpdate() {
     const { scale } = this.state;
-    const node = this.node;
-    const parentNode = node.parentNode;
+    const { node } = this;
+    const { parentNode } = node;
     const availableWidth = parentNode.offsetWidth;
     const actualWidth = node.offsetWidth;
     const actualScale = availableWidth / actualWidth;
@@ -45,9 +48,10 @@ class AutoScalingText extends Component {
 }
 
 const Display = props => {
+  const { className, currentNumber } = props;
   return (
-    <div id="display" data-test="display" className={props.className} readOnly>
-      <AutoScalingText>{props.currentNumber}</AutoScalingText>
+    <div id="display" data-test="display" className={className} readOnly>
+      <AutoScalingText>{currentNumber}</AutoScalingText>
     </div>
   );
 };

@@ -1,25 +1,30 @@
 @font-face {
-  font-family: 'Samsung Sharp Sans Regular';
+  font-family: "Samsung Sharp Sans Regular";
   font-style: normal;
   font-weight: normal;
-  src: local('Samsung Sharp Sans Regular'), url('../../assets/fonts/samsungsharpsans.woff') format('woff');
-  }
-  
-  @font-face {
-  font-family: 'Samsung Sharp Sans Medium';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Samsung Sharp Sans Medium'), url('../../assets/fonts/samsungsharpsans-medium.woff') format('woff');
-  }
-  
-  @font-face {
-  font-family: 'Samsung Sharp Sans Bold';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Samsung Sharp Sans Bold'), url('../../assets/fonts/samsungsharpsans-bold.woff') format('woff');
-  }
+  src: local("Samsung Sharp Sans Regular"),
+    url("../../assets/fonts/samsungsharpsans.woff") format("woff");
+}
 
-html, body, #root {
+@font-face {
+  font-family: "Samsung Sharp Sans Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Samsung Sharp Sans Medium"),
+    url("../../assets/fonts/samsungsharpsans-medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Samsung Sharp Sans Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Samsung Sharp Sans Bold"),
+    url("../../assets/fonts/samsungsharpsans-bold.woff") format("woff");
+}
+
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -39,9 +44,9 @@ html, body, #root {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Samsung Sharp Sans Regular', "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Samsung Sharp Sans Regular",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: url("../../assets/img/calc_desktop_background.jpg");
@@ -55,9 +60,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    .calculator{
-      background-color: #ffffff;
+
+    .calculator {
+      // background-color: #ffffff;
       width: 372px;
       max-width: 100%;
       height: 662px;
@@ -66,15 +71,13 @@ body {
       flex-wrap: wrap;
       justify-content: center;
       font-size: calc(10px + 2vmin);
-      -webkit-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-      -moz-box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-      box-shadow: 0px 0px 180px 0px rgba(0,0,0,0.7);
-    
-      &--buttons{
+      -webkit-box-shadow: 0px 0px 180px 0px rgba(0, 0, 0, 0.7);
+      -moz-box-shadow: 0px 0px 180px 0px rgba(0, 0, 0, 0.7);
+      box-shadow: 0px 0px 180px 0px rgba(0, 0, 0, 0.7);
+
+      &--buttons {
         height: calc(100% - 197px);
       }
     }
   }
-
 }
-
