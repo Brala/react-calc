@@ -61,7 +61,6 @@ const App = () => {
       /\d*\.?\d+(e-?)?\d*\.?(?!.*\d)/g
     );
 
-    //  ("×" + buttonName))
     switch (true) {
       case buttonName === "0" ||
         buttonName === "1" ||

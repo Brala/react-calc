@@ -35,6 +35,7 @@ class AutoScalingText extends Component {
     const { scale } = this.state;
 
     return (
+      // eslint-disable-next-line react/jsx-filename-extension
       <div
         className="auto-scaling-text"
         style={{ transform: `scale(${scale},${scale})` }}

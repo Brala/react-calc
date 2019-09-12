@@ -1,17 +1,53 @@
-.calculator--buttons--button {
-  width: 25%;
-  height: 20%;
-  font-size: 25px;
-  border: none;
-  color: #616161;
-  background-color: #ffffff;
-  font-family: "Samsung Sharp Sans Regular";
-  cursor: pointer;
-  transition: text-shadow 0.1s;
-  will-change: transform, text-shadow;
-  &__bold {
-    @extend .calculator--buttons--button;
-    font-family: "Samsung Sharp Sans Bold";
-    background-color: #d7d7d7;
+.calculator--buttons {
+  height: calc(100% - 197px);
+  // background-color: #fff;
+  overflow: hidden;
+  position: relative;
+
+  &--button {
+    width: 25%;
+    height: 20%;
+    font-size: 25px;
+    border: none;
+    color: #616161;
+    // background-color: #ffffff;
+    font-family: "Samsung Sharp Sans Regular";
+    cursor: pointer;
+    transition: text-shadow 0.1s;
+    will-change: transform, text-shadow;
+    background-color: transparent;
+    border: 0px solid #fff;
+    position: relative;
+    z-index: 9;
+
+    &:after {
+      background-color: #fff;
+      top: 1px;
+      bottom: 1px;
+      right: 1px;
+      left: 1px;
+      content: "";
+      position: absolute;
+      z-index: -1;
+    }
+
+    &__bold {
+      @extend .calculator--buttons--button;
+      font-family: "Samsung Sharp Sans Bold";
+      background-color: #d7d7d7;
+
+      &:after {
+        background-color: #d7d7d7;
+      }
+    }
+  }
+  &--light {
+    position: absolute;
+    width: 15rem;
+    height: 15rem;
+    zindex: 4;
+    borderradius: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background: radial-gradient(ellipse at center, #d7d7d788 0%, #eeeeee00 50%);
   }
 }

@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Button.scss";
-import { useTrail, animated } from "react-spring";
+import { useSpring, useTrail, animated } from "react-spring";
 // import UniqueID from 'react-html-id';
 
 const Buttons = props => {
   const dispatch = useDispatch();
   const buttons = useSelector(state => state.buttons.buttons);
+
+  const whiteBg = useSpring({
+    from: { background: "#ffffff00" },
+    to: { background: "#ffffff" },
+    config: { duration: 900 }
+  });
 
   const trail = useTrail(buttons.length, {
     config: { mass: 1, tension: 10000, friction: 300 },
@@ -14,23 +20,31 @@ const Buttons = props => {
     opacity: 1,
     x: 1
   });
+
   const toggleHover = event =>
     dispatch({
       type: "TOGGLE_HOVER_BUTTON",
       index: event.target.getAttribute("data-key")
     });
 
-  // const divStyle = {
-  //   position: "absolute",
-  //   width: "15rem",
-  //   height: "15rem",
-  //   zIndex: "4",
-  //   borderRadius: "50%",
-  //   transform: "translate3d(-50%, -50%, 0)"
-  // };
+  useEffect(() => {
+    const light = document.getElementById("light");
+    const calculatorButtons = document.getElementById("calculatorButtons");
+    calculatorButtons.addEventListener("mousemove", e => {
+      const rect = calculatorButtons.getBoundingClientRect();
+      light.style.top = `${e.clientY - rect.top}px`;
+      light.style.left = `${e.clientX - rect.left}px`;
+    });
+  }, []);
 
   return (
-    <div className="calculator--buttons" data-test="calculator--buttons">
+    // eslint-disable-next-line react/jsx-filename-extension
+    <animated.div
+      className="calculator--buttons"
+      id="calculatorButtons"
+      data-test="calculator--buttons"
+      style={whiteBg}
+    >
       {trail.map(({ x, ...rest }, index) => (
         <animated.button
           key={buttons[index].name} // 'this.nextUniqueId()'
@@ -40,20 +54,26 @@ const Buttons = props => {
           className={buttons[index].className}
           style={{
             ...rest,
-            transform: x.interpolate(x => `scale(${x})`),
+            transform: x.interpolate(() => `scale(${x})`),
             // backgroundColor: buttons[index].hover && '#f988bd63',
             textShadow: buttons[index].hover && "2px 1px 2px #f988bdc2"
           }}
           onClick={() => props.handleClick(buttons[index].name)}
           onMouseOver={toggleHover}
+          onFocus={toggleHover}
           onMouseOut={toggleHover}
+          onBlur={toggleHover}
         >
           {buttons[index].name}
         </animated.button>
       ))}
-      {/* <div id="light" style={divStyle} /> */}
-    </div>
+      <div id="light" className="calculator--buttons--light" />
+    </animated.div>
   );
+
+  // button.propTypes = {
+  //   handleClick: PropTypes.any
+  // };
 };
 
 export default Buttons;
